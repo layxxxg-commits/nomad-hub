@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>라영's 디지털 노마드 허브</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#ffffff;--bg2:#f7f6f3;--bg3:#efeeec;
+  --text:#37352f;--text2:#6b6968;--text3:#9b9a97;
+  --border:#e9e8e5;--border2:#d3d1cb;
+  --radius:6px;--radius-lg:8px;
+  --font:'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+}
+body{font-family:var(--font);background:var(--bg);color:var(--text);padding:1.5rem;min-height:100vh}
+.app{max-width:900px;margin:0 auto}
+.hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem}
+.hdr h1{font-size:20px;font-weight:600;color:var(--text)}
+.hdr p{font-size:12px;color:var(--text2);margin-top:2px}
+.dbadge{font-size:11px;color:var(--text3);background:var(--bg2);padding:5px 10px;border-radius:var(--radius);border:1px solid var(--border);white-space:nowrap}
+.nav{display:flex;border-bottom:1px solid var(--border);margin-bottom:1.2rem;overflow-x:auto;gap:0}
+.nt{font-size:12px;padding:.45rem .7rem;cursor:pointer;color:var(--text2);border-bottom:2px solid transparent;white-space:nowrap;display:flex;align-items:center;gap:4px;transition:.15s}
+.nt:hover{color:var(--text)}
+.nt.on{color:var(--text);border-bottom-color:var(--text);font-weight:500}
+.sec{display:none}.sec.on{display:block}
+.sg{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin-bottom:1.1rem}
+.st{background:var(--bg2);border-radius:var(--radius);padding:.7rem .85rem}
+.sl{font-size:10px;color:var(--text2);margin-bottom:3px}
+.sv{font-size:20px;font-weight:600;color:var(--text)}
+.ss{font-size:9px;color:var(--text3);margin-top:2px}
+.pb{height:3px;background:var(--border);border-radius:99px;margin-top:5px;overflow:hidden}
+.pbf{height:100%;border-radius:99px}
+.r2{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:1rem}
+.card{background:var(--bg);border:1px solid var(--border);border-radius:var(--radius-lg);padding:.85rem 1rem;margin-bottom:1rem}
+.card:last-child{margin-bottom:0}
+.ct{font-size:12px;font-weight:600;color:var(--text);margin-bottom:.65rem;display:flex;align-items:center;justify-content:space-between}
+.ctl{display:flex;align-items:center;gap:5px}
+.abtn{font-size:10px;padding:3px 8px;border-radius:99px;border:1px solid var(--border);cursor:pointer;color:var(--text2);background:var(--bg);display:flex;align-items:center;gap:3px;transition:.15s}
+.abtn:hover{background:var(--bg2)}
+.tr{display:flex;align-items:flex-start;gap:.45rem;padding:.35rem 0;border-bottom:1px solid var(--border)}
+.tr:last-child{border-bottom:none}
+.cb{width:14px;height:14px;border-radius:3px;border:1.5px solid var(--border2);flex-shrink:0;display:flex;align-items:center;justify-content:center;cursor:pointer;margin-top:1px;transition:.15s}
+.cb.on{background:#7F77DD;border-color:#7F77DD}
+.cb.on i{color:#fff;font-size:9px}
+.tt{font-size:12px;color:var(--text);flex:1;line-height:1.4}
+.tt.dn{text-decoration:line-through;color:var(--text3)}
+.tag{font-size:9px;padding:1px 6px;border-radius:99px;font-weight:500;white-space:nowrap}
+.tp{background:#EEEDFE;color:#534AB7}.tt2{background:#E1F5EE;color:#0F6E56}
+.tc{background:#FAECE7;color:#993C1D}.ta{background:#FAEEDA;color:#854F0B}
+.tg{background:#F1EFE8;color:#5F5E5A}.tb{background:#E6F1FB;color:#185FA5}
+.pd{width:6px;height:6px;border-radius:50%;flex-shrink:0;margin-top:3px}
+.ph{background:#E24B4A}.pm{background:#EF9F27}.pl{background:#1D9E75}
+.ar{display:flex;align-items:center;gap:4px;padding:.25rem 0;font-size:11px;color:var(--text3);cursor:pointer;margin-top:.25rem;transition:.15s}
+.ar:hover{color:var(--text2)}
+.ri{display:flex;gap:8px;padding:.4rem 0;border-bottom:1px solid var(--border)}
+.ri:last-child{border-bottom:none}
+.rp{font-size:9px;font-weight:500;padding:2px 7px;border-radius:99px;white-space:nowrap;height:fit-content;margin-top:1px}
+.rtxt{font-size:12px;color:var(--text);line-height:1.4}
+.rsub{font-size:10px;color:var(--text2);margin-top:1px;line-height:1.5}
+.mr{display:flex;justify-content:space-between;align-items:center;padding:.38rem 0;border-bottom:1px solid var(--border);font-size:12px}
+.mr:last-child{border-bottom:none}
+.mi{color:#0F6E56;font-weight:500}.me{color:#A32D2D;font-weight:500}
+.hg{display:grid;grid-template-columns:repeat(7,1fr);gap:3px;margin-top:.3rem}
+.hd{font-size:9px;color:var(--text3);text-align:center}
+.hc{width:100%;aspect-ratio:1;border-radius:3px;border:1px solid var(--border);cursor:pointer;background:var(--bg);transition:.15s}
+.hc.on{background:#7F77DD;border-color:#7F77DD}
+.hc:hover{background:var(--bg2)}
+.pl-nav{display:flex;gap:5px;margin-bottom:.9rem;flex-wrap:wrap}
+.pl-tab{font-size:11px;padding:4px 11px;border-radius:99px;border:1px solid var(--border);cursor:pointer;color:var(--text2);background:var(--bg);transition:.15s}
+.pl-tab:hover{background:var(--bg2)}
+.pl-tab.on{font-weight:500;color:var(--text);border-color:var(--border2);background:var(--bg2)}
+.pls{display:none}.pls.on{display:block}
+.vr{display:flex;align-items:center;gap:.45rem;padding:.38rem 0;border-bottom:1px solid var(--border);font-size:12px}
+.vr:last-child{border-bottom:none}
+.vi{font-size:11px;padding:3px 6px;border-radius:var(--radius);border:1px solid var(--border);background:var(--bg2);color:var(--text);width:70px;text-align:right;font-family:var(--font)}
+.br2{display:flex;align-items:flex-start;gap:.5rem;padding:.4rem 0;border-bottom:1px solid var(--border)}
+.br2:last-child{border-bottom:none}
+.bav{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;flex-shrink:0}
+.kr{display:flex;align-items:center;justify-content:space-between;padding:.38rem 0;border-bottom:1px solid var(--border);font-size:11px}
+.kr:last-child{border-bottom:none}
+.kn{color:var(--text);flex:1;font-size:12px}
+.mb{width:70px;height:3px;background:var(--border);border-radius:99px;overflow:hidden;margin:0 6px}
+.mbf{height:100%;border-radius:99px}
+.kv{font-weight:500;font-size:10px}.kv.warn{color:#854F0B}
+.cgrid{display:grid;grid-template-columns:repeat(7,1fr);gap:2px}
+.chd{font-size:10px;color:var(--text3);text-align:center;padding:.25rem 0}
+.cc{min-height:50px;border-radius:5px;border:1px solid var(--border);padding:3px;cursor:pointer;background:var(--bg);transition:.12s}
+.cc:hover{background:var(--bg2)}
+.cc.today{border-color:#7F77DD;border-width:2px}
+.cc.sel{background:#EEEDFE;border-color:#7F77DD}
+.cc.other{opacity:.3;cursor:default}
+.cnum{font-size:10px;color:var(--text2);margin-bottom:2px}
+.cc.today .cnum{color:#534AB7;font-weight:600}
+.cchip{font-size:8px;padding:1px 3px;border-radius:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;margin-bottom:1px;line-height:1.35}
+.cchip.dn{opacity:.4;text-decoration:line-through}
+.ftab{font-size:10px;padding:2px 8px;border-radius:99px;border:1px solid var(--border);cursor:pointer;color:var(--text2);background:var(--bg);transition:.15s}
+.ftab:hover{background:var(--bg2)}
+.ftab.on{font-weight:500;color:var(--text);border-color:var(--border2);background:var(--bg2)}
+.filter-row{display:flex;gap:4px;flex-wrap:wrap;margin-bottom:.65rem}
+.empty{font-size:11px;color:var(--text3);padding:.45rem 0;text-align:center}
+.wgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:1rem}
+.wcol{min-height:100px}
+.wchd{font-size:12px;font-weight:600;color:var(--text2);padding:.25rem 0;border-bottom:1px solid var(--border);margin-bottom:.35rem;display:flex;align-items:center;justify-content:space-between}
+.wct{font-size:11px;padding:.28rem .4rem;border-radius:var(--radius);margin-bottom:.25rem;border:1px solid var(--border);background:var(--bg);cursor:pointer;display:flex;align-items:center;gap:.35rem;transition:.1s}
+.wct:hover{background:var(--bg2)}
+.wct.dn-t .wctx{text-decoration:line-through;color:var(--text3)}
+.wctx{font-size:11px;color:var(--text);flex:1;line-height:1.35}
+.mwrap{display:grid;grid-template-columns:repeat(3,1fr);gap:4px}
+.mcell{border:1px solid var(--border);border-radius:6px;padding:.5rem .55rem;background:var(--bg)}
+.mcell.mc{background:#EEEDFE;border-color:#AFA9EC}
+.mcell.ms{background:var(--bg2)}
+.mctxt{font-size:12px;font-weight:600;color:#534AB7;text-align:center;padding:.3rem 0;outline:none}
+.msn{font-size:10px;font-weight:600;color:var(--text);text-align:center;padding:.2rem 0;border-bottom:1px solid var(--border);margin-bottom:.25rem;outline:none}
+.mtr{display:flex;align-items:center;gap:.25rem;padding:.1rem 0}
+.mcb{width:10px;height:10px;border-radius:2px;border:1px solid var(--border2);flex-shrink:0;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:.15s}
+.mcb.on{background:#7F77DD;border-color:#7F77DD}
+.mcb.on i{color:#fff;font-size:7px}
+.mtt{font-size:9px;color:var(--text2);flex:1;line-height:1.3;outline:none}
+.mtt.dn{text-decoration:line-through;color:var(--text3)}
+.vgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.vcard{border-radius:var(--radius-lg);border:1px solid var(--border);overflow:hidden;background:var(--bg);cursor:pointer;transition:.15s}
+.vcard:hover{border-color:var(--border2)}
+.vph{width:100%;height:85px;display:flex;align-items:center;justify-content:center;font-size:30px}
+.vbody{padding:.5rem .65rem}
+.vtitle{font-size:12px;font-weight:500;color:var(--text);margin-bottom:.25rem;line-height:1.4}
+.bcrd{background:var(--bg2);border-radius:var(--radius);padding:.65rem .85rem;margin-bottom:.65rem}
+.btitle{font-size:12px;font-weight:600;color:var(--text);margin-bottom:.32rem;display:flex;align-items:center;gap:5px}
+.bitem{font-size:11px;color:var(--text2);padding:.1rem 0;line-height:1.7}
+.phasec{border-left:3px solid;border-radius:0 6px 6px 0;padding:.6rem .85rem;margin-bottom:.6rem;background:var(--bg);border-top:1px solid var(--border);border-right:1px solid var(--border);border-bottom:1px solid var(--border)}
+.del-btn{opacity:0;font-size:10px;color:var(--text3);cursor:pointer;padding:1px 3px;flex-shrink:0;transition:.15s}
+.tr:hover .del-btn{opacity:1}
+.del-btn:hover{color:#A32D2D}
+.cal-nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:.7rem}
+.cal-title{font-size:13px;font-weight:600;color:var(--text)}
+.cal-arrow{font-size:12px;padding:3px 8px;border-radius:var(--radius);border:1px solid var(--border);cursor:pointer;color:var(--text2);background:var(--bg);transition:.15s}
+.cal-arrow:hover{background:var(--bg2)}
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.4);z-index:999;align-items:center;justify-content:center}
+.modal-box{background:var(--bg);border-radius:var(--radius-lg);padding:1.2rem;width:290px;border:1px solid var(--border);box-shadow:0 8px 30px rgba(0,0,0,.12)}
+input,select,textarea{outline:none}
+input:focus,select:focus,textarea:focus{border-color:#7F77DD!important}
+</style>
+</head>
+<body>
+<div class="app">
+<div class="hdr">
+  <div><h1>라영's 디지털 노마드 허브</h1><p>집순이 리빙 · 쇼핑 숏폼 · 쿠팡 파트너스 · 월 1,000만원</p></div>
+  <div class="dbadge" id="today-date"></div>
+</div>
+<div class="nav">
+  <div class="nt on" onclick="sw('home',this)"><i class="ti ti-home"></i> 홈</div>
+  <div class="nt" onclick="sw('todo',this)"><i class="ti ti-checkbox"></i> To-Do</div>
+  <div class="nt" onclick="sw('weekly',this)"><i class="ti ti-layout-columns"></i> 주간업무</div>
+  <div class="nt" onclick="sw('calendar',this)"><i class="ti ti-calendar"></i> 캘린더</div>
+  <div class="nt" onclick="sw('platforms',this)"><i class="ti ti-device-mobile"></i> 플랫폼</div>
+  <div class="nt" onclick="sw('coupang',this)"><i class="ti ti-coin"></i> 쿠팡</div>
+  <div class="nt" onclick="sw('research',this)"><i class="ti ti-search"></i> 시장조사</div>
+  <div class="nt" onclick="sw('roadmap',this)"><i class="ti ti-road"></i> 로드맵</div>
+  <div class="nt" onclick="sw('mandalart',this)"><i class="ti ti-grid-dots"></i> 만다라트</div>
+  <div class="nt" onclick="sw('vision',this)"><i class="ti ti-heart"></i> 비전보드</div>
+  <div class="nt" onclick="sw('brand',this)"><i class="ti ti-star"></i> 브랜드</div>
+  <div class="nt" onclick="sw('life',this)"><i class="ti ti-leaf"></i> life</div>
+</div>
+
+<div id="home" class="sec on">
+  <div class="sg">
+    <div class="st"><div class="sl">이번 달 수익</div><div class="sv" id="h-inc" style="color:#0F6E56">0원</div><div class="ss">목표: 30만원</div></div>
+    <div class="st"><div class="sl">오늘 완료</div><div class="sv" id="h-done">0</div><div class="pb"><div class="pbf" id="h-bar" style="background:#7F77DD;width:0%"></div></div></div>
+    <div class="st"><div class="sl">이번 주 업로드</div><div class="sv" id="h-upl">0</div></div>
+    <div class="st"><div class="sl">현재 단계</div><div class="sv" style="font-size:13px">씨앗 심기</div><div class="ss">0~3개월</div></div>
+  </div>
+  <div class="r2">
+    <div class="card"><div class="ct"><div class="ctl"><i class="ti ti-flame" style="color:#D85A30"></i> 오늘의 To-Do</div><button class="abtn" onclick="openAdd('today')"><i class="ti ti-plus"></i> 추가</button></div><div id="h-today"></div></div>
+    <div class="card"><div class="ct"><div class="ctl"><i class="ti ti-calendar-check" style="color:#7F77DD"></i> 오늘 업로드</div></div><div id="h-upl-list"></div><div style="margin-top:.5rem;padding-top:.5rem;border-top:1px solid var(--border);font-size:10px;color:var(--text2);line-height:1.7;font-style:italic">"처음이라 느려도 괜찮아. 오늘 하나가 1년 후 자산."</div></div>
+  </div>
+  <div class="card"><div class="ct"><div class="ctl"><i class="ti ti-flag" style="color:#534AB7"></i> 첫 30일 목표</div></div><div id="first30"></div></div>
+</div>
+
+<div id="todo" class="sec">
+  <div class="sg">
+    <div class="st"><div class="sl">전체</div><div class="sv" id="td-total">0</div></div>
+    <div class="st"><div class="sl">오늘 완료</div><div class="sv" id="td-done">0</div><div class="pb"><div class="pbf" id="td-bar" style="background:#7F77DD;width:0%"></div></div></div>
+    <div class="st"><div class="sl">오늘 남은 것</div><div class="sv" id="td-left" style="color:#A32D2D">0</div></div>
+    <div class="st"><div class="sl">이번 주 완료율</div><div class="sv" id="td-wpct">0%</div></div>
+  </div>
+  <div class="r2">
+    <div class="card">
+      <div class="ct"><div class="ctl"><i class="ti ti-flame" style="color:#D85A30"></i> 오늘의 To-Do</div><button class="abtn" onclick="openAdd('today')"><i class="ti ti-plus"></i> 추가</button></div>
+      <div class="filter-row" id="td-filters"><div class="ftab on" onclick="setTF('전체',this)">전체</div><div class="ftab" onclick="setTF('업무',this)">업무</div><div class="ftab" onclick="setTF('콘텐츠',this)">콘텐츠</div><div class="ftab" onclick="setTF('개인',this)">개인</div></div>
+      <div id="today-list"></div>
+    </div>
+    <div class="card"><div class="ct"><div class="ctl"><i class="ti ti-calendar-week" style="color:#7F77DD"></i> 금주의 To-Do</div><button class="abtn" onclick="openAdd('week')"><i class="ti ti-plus"></i> 추가</button></div><div id="week-list"></div></div>
+  </div>
+</div>
+
+<div id="weekly" class="sec">
+  <div class="card" style="margin-bottom:.7rem;padding:.65rem .9rem"><div style="font-size:11px;color:var(--text2);line-height:1.8">일잘러는 지난주 한 일에서 미흡한 점을 찾고, 다음 주에 반영합니다.<br><span style="font-style:italic;color:var(--text3)">"나는 지난주에 무얼 했나요? 다음 주엔 무얼 더 해볼 계획인가요?"</span></div></div>
+  <div class="wgrid" id="wgrid"></div>
+  <div class="card"><div class="ct"><div class="ctl"><i class="ti ti-writing" style="color:#534AB7"></i> 주간 회고</div></div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+      <div><div style="font-size:10px;color:var(--text2);margin-bottom:.25rem">잘 한 것</div><textarea placeholder="이번 주 잘 한 점..." style="width:100%;height:60px;font-size:11px;color:var(--text);background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:6px;resize:none;font-family:var(--font)"></textarea></div>
+      <div><div style="font-size:10px;color:var(--text2);margin-bottom:.25rem">다음 주 개선</div><textarea placeholder="다음 주 더 잘 하고 싶은 것..." style="width:100%;height:60px;font-size:11px;color:var(--text);background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:6px;resize:none;font-family:var(--font)"></textarea></div>
+    </div>
+  </div>
+</div>
+
+<div id="calendar" class="sec">
+  <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:.8rem;align-items:center">
+    <div style="display:flex;gap:8px;flex-wrap:wrap;flex:1;font-size:10px;color:var(--text2)">
+      <span><span style="width:7px;height:7px;border-radius:50%;background:#378ADD;display:inline-block;margin-right:3px"></span>블로그</span>
+      <span><span style="width:7px;height:7px;border-radius:50%;background:#D4537E;display:inline-block;margin-right:3px"></span>인스타</span>
+      <span><span style="width:7px;height:7px;border-radius:50%;background:#444441;display:inline-block;margin-right:3px"></span>틱톡</span>
+      <span><span style="width:7px;height:7px;border-radius:50%;background:#E24B4A;display:inline-block;margin-right:3px"></span>유튜브</span>
+      <span><span style="width:7px;height:7px;border-radius:50%;background:#1D9E75;display:inline-block;margin-right:3px"></span>네이버</span>
+    </div>
+    <button class="abtn" onclick="openAdd('cal')"><i class="ti ti-plus"></i> 날짜 지정 추가</button>
+    <button class="abtn" onclick="goToday()">오늘</button>
+  </div>
+  <div class="card">
+    <div class="cal-nav"><button class="cal-arrow" onclick="chM(-1)"><i class="ti ti-chevron-left"></i></button><div class="cal-title" id="cal-title"></div><button class="cal-arrow" onclick="chM(1)"><i class="ti ti-chevron-right"></i></button></div>
+    <div class="cgrid" id="cal-hdr"></div><div style="height:3px"></div><div class="cgrid" id="cal-body"></div>
+    <div id="sel-panel" style="display:none;margin-top:.8rem;padding-top:.8rem;border-top:1px solid var(--border)">
+      <div class="ct"><div class="ctl" id="sel-title" style="font-size:12px;font-weight:600"></div><button class="abtn" onclick="openAddSel()"><i class="ti ti-plus"></i> 이 날 추가</button></div>
+      <div id="sel-list"></div>
+    </div>
+  </div>
+</div>
+
+<div id="platforms" class="sec">
+  <div class="pl-nav">
+    <div class="pl-tab on" onclick="swPl('insta',this)"><i class="ti ti-brand-instagram"></i> 인스타</div>
+    <div class="pl-tab" onclick="swPl('blog',this)"><i class="ti ti-pencil"></i> 블로그</div>
+    <div class="pl-tab" onclick="swPl('tiktok',this)"><i class="ti ti-brand-tiktok"></i> 틱톡</div>
+    <div class="pl-tab" onclick="swPl('youtube',this)"><i class="ti ti-brand-youtube"></i> 유튜브</div>
+    <div class="pl-tab" onclick="swPl('naver',this)"><i class="ti ti-device-tv"></i> 네이버 클립</div>
+  </div>
+  <div id="insta" class="pls on"><div class="sg"><div class="st"><div class="sl">릴스</div><div class="sv" id="ig-t">0</div></div><div class="st"><div class="sl">팔로워</div><div class="sv">0</div></div><div class="st"><div class="sl">목표</div><div class="sv">12개</div></div><div class="st"><div class="sl">달성률</div><div class="sv" id="ig-p">0%</div><div class="pb"><div class="pbf" id="ig-b" style="background:#D4537E;width:0%"></div></div></div></div><div class="card"><div class="ct"><div class="ctl"><i class="ti ti-brand-instagram" style="color:#D4537E"></i> 릴스 기록</div></div><div id="ig-list"></div><div class="ar" onclick="addIg()"><i class="ti ti-plus"></i> 릴스 추가 (캘린더 자동 기록)</div></div></div>
+  <div id="blog" class="pls"><div class="sg"><div class="st"><div class="sl">총 글</div><div class="sv" id="bl-t">0</div></div><div class="st"><div class="sl">발행 완료</div><div class="sv" id="bl-d">0</div></div><div class="st"><div class="sl">아이디어</div><div class="sv" id="bl-i">0</div></div><div class="st"><div class="sl">목표</div><div class="sv">20개</div></div></div><div class="card"><div class="ct"><div class="ctl"><i class="ti ti-pencil" style="color:#378ADD"></i> 블로그 아이디어 + 발행</div></div><div id="bl-list"></div><div class="ar" onclick="addBlog()"><i class="ti ti-plus"></i> 아이디어 추가 (발행 체크 → 캘린더 자동 기록)</div></div></div>
+  <div id="tiktok" class="pls"><div class="sg"><div class="st"><div class="sl">총 영상</div><div class="sv" id="tt-t">0</div></div><div class="st"><div class="sl">총 조회수</div><div class="sv" id="tt-v">0</div></div><div class="st"><div class="sl">팔로워</div><div class="sv">0</div></div><div class="st"><div class="sl">목표</div><div class="sv">30개</div></div></div><div class="card"><div class="ct"><div class="ctl"><i class="ti ti-brand-tiktok"></i> 틱톡 기록</div></div><div id="tt-list"></div><div class="ar" onclick="addVid('tt')"><i class="ti ti-plus"></i> 영상 추가 (캘린더 자동 기록)</div></div></div>
+  <div id="youtube" class="pls"><div class="sg"><div class="st"><div class="sl">총 쇼츠</div><div class="sv" id="yt-t">0</div></div><div class="st"><div class="sl">총 조회수</div><div class="sv" id="yt-v">0</div></div><div class="st"><div class="sl">구독자</div><div class="sv">0</div></div><div class="st"><div class="sl">목표</div><div class="sv">30개</div></div></div><div class="card"><div class="ct"><div class="ctl"><i class="ti ti-brand-youtube" style="color:#E24B4A"></i> 유튜브 쇼츠</div></div><div id="yt-list"></div><div class="ar" onclick="addVid('yt')"><i class="ti ti-plus"></i> 쇼츠 추가 (캘린더 자동 기록)</div></div></div>
+  <div id="naver" class="pls"><div class="sg"><div class="st"><div class="sl">총 클립</div><div class="sv" id="nv-t">0</div></div><div class="st"><div class="sl">총 조회수</div><div class="sv" id="nv-v">0</div></div><div class="st"><div class="sl">팔로워</div><div class="sv">0</div></div><div class="st"><div class="sl">목표</div><div class="sv">8개</div></div></div><div class="card"><div class="ct"><div class="ctl"><i class="ti ti-device-tv" style="color:#1D9E75"></i> 네이버 클립</div></div><div id="nv-list"></div><div class="ar" onclick="addVid('nv')"><i class="ti ti-plus"></i> 클립 추가 (캘린더 자동 기록)</div></div></div>
+</div>
+
+<div id="coupang" class="sec">
+  <div class="sg"><div class="st"><div class="sl">이번 달 수익</div><div class="sv" id="cp-i" style="color:#0F6E56">0원</div></div><div class="st"><div class="sl">지출</div><div class="sv" id="cp-e">0원</div></div><div class="st"><div class="sl">순수익</div><div class="sv" id="cp-n">0원</div></div><div class="st"><div class="sl">달성률</div><div class="sv" id="cp-p">0%</div><div class="pb"><div class="pbf" id="cp-b" style="background:#1D9E75;width:0%"></div></div></div></div>
+  <div class="r2"><div class="card"><div class="ct"><div class="ctl"><i class="ti ti-arrow-up-circle" style="color:#0F6E56"></i> 수입</div></div><div id="inc-list"></div><div class="ar" onclick="addInc()"><i class="ti ti-plus"></i> 수입 추가</div></div><div class="card"><div class="ct"><div class="ctl"><i class="ti ti-arrow-down-circle" style="color:#A32D2D"></i> 지출</div></div><div id="exp-list"></div><div class="ar" onclick="addExp()"><i class="ti ti-plus"></i> 지출 추가</div></div></div>
+  <div class="card"><div class="ct"><div class="ctl"><i class="ti ti-target" style="color:#534AB7"></i> 수익 목표</div></div>
+    <div class="kr"><span class="kn">1단계 — 월 30만원</span><div class="mb"><div class="mbf" id="g1b" style="background:#E24B4A;width:0%"></div></div><span class="kv warn" id="g1p">0%</span></div>
+    <div class="kr"><span class="kn">2단계 — 월 100만원</span><div class="mb"><div class="mbf" style="background:#EF9F27;width:0%"></div></div><span class="kv warn">0%</span></div>
+    <div class="kr"><span class="kn">3단계 — 월 300만원</span><div class="mb"><div class="mbf" style="background:#7F77DD;width:0%"></div></div><span class="kv warn">0%</span></div>
+    <div class="kr"><span class="kn">4단계 — 월 1,000만원</span><div class="mb"><div class="mbf" style="background:#1D9E75;width:0%"></div></div><span class="kv warn">0%</span></div>
+  </div>
+</div>
+
+<div id="research" class="sec">
+  <div class="filter-row" id="bf-row"><div class="ftab on" onclick="setBF('전체',this)">전체</div><div class="ftab" onclick="setBF('인스타',this)">인스타</div><div class="ftab" onclick="setBF('유튜브',this)">유튜브</div><div class="ftab" onclick="setBF('틱톡',this)">틱톡</div><div class="ftab" onclick="setBF('블로그',this)">블로그</div><div class="ftab" onclick="setBF('네이버 클립',this)">네이버 클립</div></div>
+  <div class="card"><div class="ct"><div class="ctl"><i class="ti ti-users" style="color:#7F77DD"></i> 벤치마킹 계정</div></div><div id="bench-list"></div><div class="ar" onclick="addBench()"><i class="ti ti-plus"></i> 계정 추가</div></div>
+  <div class="r2">
+    <div class="card"><div class="ct"><div class="ctl"><i class="ti ti-trending-up" style="color:#D85A30"></i> 트렌드 메모</div></div><div id="trend-list"></div><div class="ar" onclick="addTrend()"><i class="ti ti-plus"></i> 추가</div></div>
+    <div class="card"><div class="ct"><div class="ctl"><i class="ti ti-package" style="color:#BA7517"></i> 잘 팔리는 카테고리</div></div><div style="display:flex;flex-wrap:wrap;gap:5px;padding:.2rem 0" id="cat-tags"><span class="tag tc" style="cursor:pointer" onclick="this.remove()">주방용품</span><span class="tag tp" style="cursor:pointer" onclick="this.remove()">뷰티/스킨케어</span><span class="tag tt2" style="cursor:pointer" onclick="this.remove()">생활용품</span><span class="tag ta" style="cursor:pointer" onclick="this.remove()">다이소 꿀템</span><span class="tag tb" style="cursor:pointer" onclick="this.remove()">아이디어 상품</span><span class="tag tg" style="cursor:pointer" onclick="this.remove()">가습기</span></div><div class="ar" onclick="addCat()"><i class="ti ti-plus"></i> 추가</div></div>
+  </div>
+</div>
+
+<div id="roadmap" class="sec">
+  <div class="card">
+    <div class="ct"><div class="ctl"><i class="ti ti-map-2" style="color:#534AB7"></i> 1년 디지털 노마드 로드맵</div></div>
+    <div class="phasec" style="border-left-color:#1D9E75"><div style="display:flex;justify-content:space-between;margin-bottom:.3rem"><span style="font-size:12px;font-weight:600">1단계 — 씨앗 심기</span><span style="font-size:10px;color:var(--text3)">0~3개월 · 0~30만원</span></div><div style="font-size:10px;color:var(--text2);margin-bottom:.3rem">블로그 주 5개 + 쇼핑 숏츠 하루 1개 + 인스타 기록 시작</div><div style="display:flex;flex-wrap:wrap;gap:4px"><span class="tag tt2">블로그 20개/월</span><span class="tag tt2">쇼츠 30개/월</span><span class="tag tt2">인스타 개설</span><span class="tag tt2">쿠팡파트너스</span></div></div>
+    <div class="phasec" style="border-left-color:#7F77DD"><div style="display:flex;justify-content:space-between;margin-bottom:.3rem"><span style="font-size:12px;font-weight:600">2단계 — 첫 수익</span><span style="font-size:10px;color:var(--text3)">3~6개월 · 30~200만원</span></div><div style="font-size:10px;color:var(--text2);margin-bottom:.3rem">잘 되는 주제 집중 + 협찬·체험단 시작</div><div style="display:flex;flex-wrap:wrap;gap:4px"><span class="tag tp">주제 전문화</span><span class="tag tp">협찬 시작</span><span class="tag tp">팔로워 기반</span></div></div>
+    <div class="phasec" style="border-left-color:#BA7517"><div style="display:flex;justify-content:space-between;margin-bottom:.3rem"><span style="font-size:12px;font-weight:600">3단계 — 사업화</span><span style="font-size:10px;color:var(--text3)">6~12개월 · 200~500만원</span></div><div style="display:flex;flex-wrap:wrap;gap:4px"><span class="tag ta">쿠팡 100~300만</span><span class="tag ta">협찬 100~300만</span><span class="tag ta">디지털 상품</span></div></div>
+    <div class="phasec" style="border-left-color:#E24B4A"><div style="display:flex;justify-content:space-between;margin-bottom:.3rem"><span style="font-size:12px;font-weight:600">4단계 — 월 1,000만원</span><span style="font-size:10px;color:var(--text3)">1~3년</span></div><div style="display:flex;flex-wrap:wrap;gap:4px"><span class="tag tc">쿠팡 300만</span><span class="tag tc">인스타 광고 300만</span><span class="tag tc">디지털 상품 200만</span><span class="tag tc">브랜드 계약 200만</span></div></div>
+  </div>
+  <div class="card"><div class="ct"><div class="ctl"><i class="ti ti-flag" style="color:#E24B4A"></i> 연도별 목표</div></div>
+    <div class="ri"><span class="rp" style="background:#E1F5EE;color:#0F6E56">2026</span><div><div class="rtxt">콘텐츠 자산 300개 만들기</div><div class="rsub">블로그·숏츠·릴스 누적</div></div></div>
+    <div class="ri"><span class="rp" style="background:#EEEDFE;color:#534AB7">2027</span><div><div class="rtxt">월 300~500만원 안정화</div><div class="rsub">협찬+쿠팡+디지털 상품 3트랙</div></div></div>
+    <div class="ri"><span class="rp" style="background:#FAEEDA;color:#854F0B">그 이후</span><div><div class="rtxt">월 1,000만원 · 진짜 디지털 노마드</div><div class="rsub">당진 예쁜 집에서 혼자 몰입하며 버는 삶</div></div></div>
+  </div>
+</div>
+
+<div id="mandalart" class="sec">
+  <div style="font-size:11px;color:var(--text2);line-height:1.7;margin-bottom:.8rem;padding:.6rem .8rem;background:var(--bg2);border-radius:var(--radius)">핵심목표 1개 중앙 → 8개 세부목표 → 각 8개 실천과제. 셀 클릭해서 직접 편집 가능!</div>
+  <div class="mwrap" id="mand-grid"></div>
+</div>
+
+<div id="vision" class="sec">
+  <div style="font-size:11px;color:var(--text2);margin-bottom:.8rem;line-height:1.7">내 인생에서 꼭 이루고 싶은 목표, 꿈을 기록해두세요!</div>
+  <div style="display:flex;justify-content:flex-end;margin-bottom:.7rem"><button class="abtn" onclick="addVision()"><i class="ti ti-plus"></i> 비전 추가</button></div>
+  <div class="vgrid" id="vision-grid"></div>
+</div>
+
+<div id="brand" class="sec">
+  <div class="bcrd"><div class="btitle"><i class="ti ti-check" style="color:#0F6E56"></i> 브랜드 원칙</div><div class="bitem">· "오늘도 귀찮았지만 이 정도는 했다" — 솔직한 일상 공유</div><div class="bitem">· 실패 과정 공개 / 진짜 써본 물건만 추천 / 꾸준히 변하는 모습 보여주기</div></div>
+  <div class="bcrd"><div class="btitle"><i class="ti ti-bulb" style="color:#BA7517"></i> 콘텐츠 방향 — 리빙 70% + 생활건강 30%</div><div class="bitem">· 평소: 30년 된 빌라 인테리어, 가성비 살림템, 주방 꾸미기</div><div class="bitem">· 다이어트: "내 감성 주방에서 차려 먹는 자취생 다이어트 식단"</div><div class="bitem">· → 방문자 눈엔 감성 리빙, 실속으론 생활건강 협찬까지</div></div>
+  <div class="bcrd"><div class="btitle"><i class="ti ti-brand-instagram" style="color:#D4537E"></i> 인스타 방향</div><div class="bitem">· 스위치온 다이어트 과정 · 식단 기록 · 체형 변화 · 집 관리 습관</div></div>
+  <div class="card"><div class="ct"><div class="ctl"><i class="ti ti-heart" style="color:#D4537E"></i> 브랜드 확장 로드맵</div></div>
+    <div class="ri"><span class="rp" style="background:#E1F5EE;color:#0F6E56">지금</span><div><div class="rtxt">집순이 리빙 + 쇼핑 숏폼</div><div class="rsub">살림템, 가성비, 가전, 주방 리뷰</div></div></div>
+    <div class="ri"><span class="rp" style="background:#EEEDFE;color:#534AB7">나중에</span><div><div class="rtxt">돈 관리·커리어 변화 스토리 추가</div><div class="rsub">10년 영업 경력 + 30대 인생 리빌딩</div></div></div>
+    <div class="ri"><span class="rp" style="background:#FAEEDA;color:#854F0B">궁극적으로</span><div><div class="rtxt">월 1,000만원 디지털 노마드 브랜드</div><div class="rsub">"당진에서 예쁜 집, 혼자 몰입하면서 돈 버는 삶"</div></div></div>
+  </div>
+</div>
+
+<div id="life" class="sec">
+  <div class="r2">
+    <div class="card"><div class="ct"><div class="ctl"><i class="ti ti-repeat" style="color:#7F77DD"></i> 습관 트래커</div></div><div id="habit-sec"></div></div>
+    <div class="card"><div class="ct"><div class="ctl"><i class="ti ti-book" style="color:#BA7517"></i> 학습 기록</div></div>
+      <div class="tr"><div class="cb on" onclick="tcb(this)"><i class="ti ti-check"></i></div><span class="tt dn">CapCut 기초 편집</span><span class="tag ta" style="margin-left:auto">완료</span></div>
+      <div class="tr"><div class="cb" onclick="tcb(this)"></div><span class="tt">쿠팡 파트너스 수익 구조</span><span class="tag tp" style="margin-left:auto">학습 중</span></div>
+      <div class="tr"><div class="cb" onclick="tcb(this)"></div><span class="tt">인스타 릴스 알고리즘</span><span class="tag tg" style="margin-left:auto">예정</span></div>
+      <div class="tr"><div class="cb" onclick="tcb(this)"></div><span class="tt">유튜브 쇼츠 SEO</span><span class="tag tg" style="margin-left:auto">예정</span></div>
+      <div class="tr"><div class="cb" onclick="tcb(this)"></div><span class="tt">블로그 SEO 키워드</span><span class="tag tg" style="margin-left:auto">예정</span></div>
+    </div>
+  </div>
+  <div class="card"><div class="ct"><div class="ctl"><i class="ti ti-mood-smile" style="color:#D4537E"></i> 오늘의 기록</div></div><textarea placeholder="오늘 하루 기록..." style="width:100%;height:80px;font-size:12px;color:var(--text);background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:7px;resize:none;font-family:var(--font)"></textarea></div>
+</div>
+</div>
+
+<div class="modal-overlay" id="modal">
+  <div class="modal-box">
+    <div style="font-size:13px;font-weight:600;color:var(--text);margin-bottom:.85rem" id="modal-title">할일 추가</div>
+    <div style="margin-bottom:.6rem"><div style="font-size:10px;color:var(--text2);margin-bottom:.22rem">할일</div><input id="m-text" type="text" placeholder="할일을 입력하세요" style="width:100%;font-size:12px;padding:6px 8px;border-radius:var(--radius);border:1px solid var(--border);background:var(--bg2);color:var(--text);font-family:var(--font)"></div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-bottom:.6rem">
+      <div><div style="font-size:10px;color:var(--text2);margin-bottom:.22rem">카테고리</div><select id="m-cat" style="width:100%;font-size:11px;padding:5px 6px;border-radius:var(--radius);border:1px solid var(--border);background:var(--bg2);color:var(--text);font-family:var(--font)"><option>업무</option><option>콘텐츠</option><option>개인</option><option>학습</option><option>기타</option></select></div>
+      <div><div style="font-size:10px;color:var(--text2);margin-bottom:.22rem">우선순위</div><select id="m-prio" style="width:100%;font-size:11px;padding:5px 6px;border-radius:var(--radius);border:1px solid var(--border);background:var(--bg2);color:var(--text);font-family:var(--font)"><option value="high">높음</option><option value="mid" selected>중간</option><option value="low">낮음</option></select></div>
+    </div>
+    <div style="margin-bottom:.85rem"><div style="font-size:10px;color:var(--text2);margin-bottom:.22rem">날짜</div><input id="m-date" type="date" style="width:100%;font-size:11px;padding:5px 6px;border-radius:var(--radius);border:1px solid var(--border);background:var(--bg2);color:var(--text);font-family:var(--font)"></div>
+    <div style="display:flex;gap:6px;justify-content:flex-end">
+      <button onclick="closeModal()" style="font-size:11px;padding:5px 12px;border-radius:var(--radius);border:1px solid var(--border);cursor:pointer;color:var(--text2);background:var(--bg)">취소</button>
+      <button onclick="saveTask()" style="font-size:11px;padding:5px 12px;border-radius:var(--radius);border:1px solid #7F77DD;cursor:pointer;color:#534AB7;background:#EEEDFE;font-weight:600">추가</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const DY=['일','월','화','수','목','금','토'];
+const PLC={blog:{c:'#378ADD',n:'블로그'},insta:{c:'#D4537E',n:'인스타'},tiktok:{c:'#444441',n:'틱톡'},youtube:{c:'#E24B4A',n:'유튜브'},naver:{c:'#1D9E75',n:'네이버'}};
+const CC={업무:'tp',콘텐츠:'tc',개인:'tt2',학습:'ta',기타:'tg'};
+const CB2={업무:['#EEEDFE','#534AB7'],콘텐츠:['#FAECE7','#993C1D'],개인:['#E1F5EE','#0F6E56'],학습:['#FAEEDA','#854F0B'],기타:['#F1EFE8','#5F5E5A']};
+const PR={high:'ph',mid:'pm',low:'pl'};
+const BPC={인스타:['#FBEAF0','#993556'],유튜브:['#FCEBEB','#A32D2D'],틱톡:['#F1EFE8','#444441'],블로그:['#E6F1FB','#185FA5'],'네이버 클립':['#E1F5EE','#0F6E56'],기타:['#F1EFE8','#5F5E5A']};
+const PLOPT=['인스타','유튜브','틱톡','블로그','네이버 클립'];
+const VCAT={라이프:'tt2',수익:'tp',콘텐츠:'tc',SNS:'tb',꿈:'ta',건강:'tg'};
+let NID=1,calY,calM,selDay=null,todayF='전체',benchF='전체',addCtx='today';
+const tds=()=>{const d=new Date();return`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;};
+const ds=(y,m,d)=>`${y}-${String(m+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+const fmt=n=>n.toLocaleString('ko-KR')+'원';
+function getWD(shift=0){const t=new Date(),day=t.getDay(),mon=new Date(t);mon.setDate(t.getDate()-(day===0?6:day-1)+shift*7);return Array.from({length:7},(_,i)=>{const d=new Date(mon);d.setDate(mon.getDate()+i);return ds(d.getFullYear(),d.getMonth(),d.getDate());});}
+let tasks=[{id:NID++,text:'쿠팡 파트너스 계정 가입',cat:'업무',prio:'high',date:tds(),done:false},{id:NID++,text:'CapCut 1번 영상 편집',cat:'콘텐츠',prio:'high',date:tds(),done:false},{id:NID++,text:'블로그 글 2개 작성',cat:'콘텐츠',prio:'high',date:tds(),done:false},{id:NID++,text:'인스타그램 계정 개설',cat:'콘텐츠',prio:'mid',date:getWD()[2],done:false},{id:NID++,text:'경쟁 계정 5개 벤치마킹',cat:'업무',prio:'mid',date:getWD()[3],done:false},{id:NID++,text:'수익 트래킹 정리',cat:'업무',prio:'low',date:getWD()[1],done:true}];
+const uploadLog=[],igPosts=[],blPosts=[],ttVids=[],ytVids=[],nvVids=[],incomes=[],expenses=[],trends=[];
+let benchmarks=[{id:NID++,handle:'@shopping_korea',platform:'인스타',followers:'2.3만',note:'주 5회 업로드, 주방/생활 특화'},{id:NID++,handle:'@cupang_pick',platform:'유튜브',followers:'1.1만',note:'쿠팡파트너스 전문, 60초 이하'},{id:NID++,handle:'살림언니블로그',platform:'블로그',followers:'월 30만PV',note:'리빙 70%+건강 30%, 링크 배치 벤치마킹'}];
+const habits=[{name:'블로그 글 1개 이상',cells:Array(7).fill(false)},{name:'숏폼 영상 1개 이상',cells:Array(7).fill(false)},{name:'쿠팡 링크 3개 수집',cells:Array(7).fill(false)},{name:'경쟁 계정 분석',cells:Array(7).fill(false)}];
+const first30=[{id:NID++,text:'블로그 글 20개',done:false},{id:NID++,text:'쇼츠 30개',done:false},{id:NID++,text:'인스타 계정 개설',done:false},{id:NID++,text:'쿠팡파트너스 링크 세팅',done:false},{id:NID++,text:'자기관리 기록 시작',done:false}];
+const mand={center:'월 100만원 디지털 노마드',subs:[{name:'블로그 수익화',tasks:['주 5개 글 작성','쿠팡 링크 전 글에','SEO 키워드 연구','상위 노출 10개','체험단 신청 3곳','리뷰 퀄리티 UP','내부 링크 연결','방문자 1천명/일'],done:[]},{name:'숏폼 콘텐츠',tasks:['하루 1개 목표','CapCut 숙달','훅 문구 30개','블로그→숏츠 재활용','썸네일 최적화','업로드 루틴','트렌드 주 1회 분석','3초 훅 완성'],done:[]},{name:'인스타 성장',tasks:['다이어트 과정 기록','식단 사진 업로드','집 관리 습관 공유','팔로워 100명 달성','협찬 DM 5곳','스토리 매일','인사이트 분석','체형 변화 월 1회'],done:[]},{name:'쿠팡 파트너스',tasks:['계정 가입 완료','링크 100개 수집','클릭 200회 목표','전환율 분석 주 1회','고수익 상품 발굴','카테고리별 세팅','배너 최적화','월 수익 30만원'],done:[]},{name:'핵심목표',tasks:[],done:[]},{name:'시장조사',tasks:['벤치마킹 10개','트렌드 주 1회 정리','카테고리 5개 정의','경쟁자 콘텐츠 분석','신제품 발굴 루틴','댓글 반응 수집','검색량 조사','콘텐츠 갭 발견'],done:[]},{name:'자기관리',tasks:['습관 트래커 매일','학습 30분/일','일기 매일 쓰기','수면 7시간 확보','운동 주 3회','다이어트 기록','주간 회고 작성','월간 목표 검토'],done:[]},{name:'수익 다각화',tasks:['디지털 상품 기획','협찬 신청 주 3곳','체험단 월 2개','브랜드 제안서 제작','노션 템플릿 판매','전자책 기획','제휴 마케팅 확장','유료 강의 기획'],done:[]},{name:'플랫폼 확장',tasks:['틱톡 계정 세팅','유튜브 채널 개설','네이버 클립 개설','스레드 운영','크로스 포스팅 루틴','플랫폼별 KPI','알고리즘 파악','해시태그 전략'],done:[]}]};
+mand.subs.forEach(s=>{s.done=Array(s.tasks.length).fill(false);});
+const visions=[{id:NID++,title:'당진 예쁜 집에서 혼자 몰입하며 일하기',cat:'라이프',emoji:'🏡',bg:'#E1F5EE'},{id:NID++,title:'월 1,000만원 디지털 노마드 달성',cat:'수익',emoji:'💰',bg:'#EEEDFE'},{id:NID++,title:'블로그 일 방문자 10,000명',cat:'콘텐츠',emoji:'📝',bg:'#FAECE7'},{id:NID++,title:'인스타 팔로워 10만명',cat:'SNS',emoji:'📱',bg:'#FBEAF0'},{id:NID++,title:'원하는 곳에서 일하는 삶',cat:'라이프',emoji:'✈️',bg:'#FAEEDA'},{id:NID++,title:'나만의 디지털 상품 런칭',cat:'수익',emoji:'🎯',bg:'#E6F1FB'}];
+function sw(id,el){document.querySelectorAll('.sec').forEach(s=>s.classList.remove('on'));document.querySelectorAll('.nt').forEach(t=>t.classList.remove('on'));document.getElementById(id).classList.add('on');el.classList.add('on');}
+function swPl(id,el){document.querySelectorAll('.pls').forEach(s=>s.classList.remove('on'));document.querySelectorAll('.pl-tab').forEach(t=>t.classList.remove('on'));document.getElementById(id).classList.add('on');el.classList.add('on');}
+function tcb(el){el.classList.toggle('on');el.innerHTML=el.classList.contains('on')?'<i class="ti ti-check"></i>':'';const s=el.nextElementSibling;if(s&&s.classList.contains('tt'))s.classList.toggle('dn',el.classList.contains('on'));}
+function logUpload(plk,title){uploadLog.push({plk,title,dateKey:tds()});renderHome();renderCal();}
+function tHTML(t){const d=new Date(t.date),today=new Date();today.setHours(0,0,0,0);const diff=Math.round((d-today)/(1000*60*60*24));let due='';if(!t.done){if(diff<0)due=`<span style="font-size:9px;color:#A32D2D">${Math.abs(diff)}일 지남</span>`;else if(diff===0)due=`<span style="font-size:9px;color:#0F6E56">오늘</span>`;else if(diff<=2)due=`<span style="font-size:9px;color:#A32D2D">D-${diff}</span>`;else due=`<span style="font-size:9px;color:var(--text3)">${d.getMonth()+1}/${d.getDate()}</span>`;}return`<div class="tr" draggable="true" ondragstart="dSt(event,${t.id})"><div class="pd ${PR[t.prio]||'pm'}" style="margin-top:3px"></div><div class="cb${t.done?' on':''}" onclick="togT(${t.id})">${t.done?'<i class="ti ti-check"></i>':''}</div><div style="flex:1;min-width:0"><div class="tt${t.done?' dn':''}">${t.text}</div><div style="display:flex;gap:3px;margin-top:2px"><span class="tag ${CC[t.cat]||'tg'}">${t.cat}</span>${due}</div></div><span class="del-btn" onclick="delT(${t.id})"><i class="ti ti-x"></i></span></div>`;}
+function togT(id){const t=tasks.find(x=>x.id===id);if(!t)return;t.done=!t.done;renderAll();}
+function delT(id){const i=tasks.findIndex(x=>x.id===id);if(i!==-1)tasks.splice(i,1);renderAll();}
+function renderHome(){const td=tds(),todayT=tasks.filter(t=>t.date===td),done=todayT.filter(t=>t.done).length,inc=incomes.reduce((a,b)=>a+b.amt,0),upl=igPosts.length+blPosts.filter(b=>b.done).length+ttVids.length+ytVids.length+nvVids.length;document.getElementById('h-inc').textContent=fmt(inc);document.getElementById('h-done').textContent=done;document.getElementById('h-bar').style.width=(todayT.length?Math.round(done/todayT.length*100):0)+'%';document.getElementById('h-upl').textContent=upl;document.getElementById('h-today').innerHTML=todayT.length?todayT.map(t=>tHTML(t)).join(''):'<div class="empty">오늘 할일이 없어요!</div>';const tu=uploadLog.filter(u=>u.dateKey===td);document.getElementById('h-upl-list').innerHTML=tu.length?tu.map(u=>`<div class="tr"><span style="width:6px;height:6px;border-radius:50%;background:${PLC[u.plk]?.c||'#888'};display:inline-block;flex-shrink:0;margin-top:3px"></span><span class="tt">${u.title}</span><span class="tag tg">${PLC[u.plk]?.n||u.plk}</span></div>`).join(''):'<div class="empty">오늘 업로드가 없어요!</div>';document.getElementById('first30').innerHTML=first30.map(f=>`<div class="tr"><div class="cb${f.done?' on':''}" onclick="togF30(${f.id})">${f.done?'<i class="ti ti-check"></i>':''}</div><span class="tt${f.done?' dn':''}">${f.text}</span><span class="tag ${f.done?'tt2':'tg'}" style="margin-left:auto">${f.done?'완료':'진행 중'}</span></div>`).join('');}
+function togF30(id){const f=first30.find(x=>x.id===id);if(!f)return;f.done=!f.done;renderHome();}
+function renderTodo(){const td=tds(),wd=getWD(),todayA=tasks.filter(t=>t.date===td),done=todayA.filter(t=>t.done).length,wkA=tasks.filter(t=>wd.includes(t.date)),wkD=wkA.filter(t=>t.done).length;document.getElementById('td-total').textContent=tasks.length;document.getElementById('td-done').textContent=done;document.getElementById('td-left').textContent=todayA.filter(t=>!t.done).length;document.getElementById('td-bar').style.width=(todayA.length?Math.round(done/todayA.length*100):0)+'%';document.getElementById('td-wpct').textContent=(wkA.length?Math.round(wkD/wkA.length*100):0)+'%';let tl=todayA;if(todayF!=='전체')tl=tl.filter(t=>t.cat===todayF);tl.sort((a,b)=>{const o={high:0,mid:1,low:2};return(a.done?10:0)+(o[a.prio]||1)-(b.done?10:0)-(o[b.prio]||1);});document.getElementById('today-list').innerHTML=tl.length?tl.map(t=>tHTML(t)).join(''):'<div class="empty">오늘 할일이 없어요!</div>';document.getElementById('week-list').innerHTML=wkA.length?wkA.sort((a,b)=>a.date>b.date?1:-1).map(t=>tHTML(t)).join(''):'<div class="empty">이번 주 할일이 없어요!</div>';}
+function setTF(f,el){todayF=f;document.querySelectorAll('#td-filters .ftab').forEach(t=>t.classList.remove('on'));el.classList.add('on');renderTodo();}
+function renderWeekly(){const cols=['지난주','이번주','다음주'];document.getElementById('wgrid').innerHTML=cols.map((col,ci)=>{const wd=getWD(ci-1);const ct=tasks.filter(t=>wd.includes(t.date));const dc=ct.filter(t=>t.done).length;return`<div class="wcol"><div class="wchd">${col}<span style="font-size:10px;color:var(--text3)">${dc}/${ct.length}</span></div>${ct.map(t=>`<div class="wct${t.done?' dn-t':''}" onclick="togT(${t.id})"><div class="cb${t.done?' on':''}" style="width:11px;height:11px;border-radius:2px;border:1px solid var(--border2);flex-shrink:0;display:flex;align-items:center;justify-content:center">${t.done?'<i class="ti ti-check" style="font-size:7px;color:#fff"></i>':''}</div><span class="wctx">${t.text}</span></div>`).join('')}<div class="ar" onclick="openAddW(${ci})"><i class="ti ti-plus"></i> 추가</div></div>`;}).join('');}
+function openAddW(ci){addCtx='w'+ci;const wd=getWD(ci-1);document.getElementById('m-text').value='';document.getElementById('m-cat').value='업무';document.getElementById('m-prio').value='mid';document.getElementById('m-date').value=wd[Math.floor(wd.length/2)];document.getElementById('modal-title').textContent='할일 추가';document.getElementById('modal').style.display='flex';}
+function renderCal(){const y=calY,m=calM;document.getElementById('cal-title').textContent=`${y}년 ${m+1}월`;document.getElementById('cal-hdr').innerHTML=['월','화','수','목','금','토','일'].map(d=>`<div class="chd">${d}</div>`).join('');const first=new Date(y,m,1);let sday=(first.getDay()+6)%7;const dim=new Date(y,m+1,0).getDate(),dipm=new Date(y,m,0).getDate(),today=tds();const cells=[];for(let i=0;i<sday;i++)cells.push({day:dipm-sday+1+i,cur:false,ds:''});for(let i=1;i<=dim;i++)cells.push({day:i,cur:true,ds:ds(y,m,i)});while(cells.length%7!==0)cells.push({day:cells.length-sday-dim+1,cur:false,ds:''});document.getElementById('cal-body').innerHTML=cells.map(c=>{const isT=c.ds===today,isSel=c.ds===selDay;const dt=c.cur?tasks.filter(t=>t.date===c.ds):[];const du=c.cur?uploadLog.filter(u=>u.dateKey===c.ds):[];const chips=dt.slice(0,2).map(t=>{const bg=CB2[t.cat]||CB2['기타'];return`<div class="cchip${t.done?' dn':''}" style="background:${bg[0]};color:${bg[1]}">${t.text}</div>`;}).join('');const dots=du.slice(0,4).map(u=>`<span style="width:5px;height:5px;border-radius:50%;background:${PLC[u.plk]?.c||'#888'};display:inline-block;margin-right:1px"></span>`).join('');return`<div class="cc${!c.cur?' other':''}${isT?' today':''}${isSel?' sel':''}" onclick="${c.cur?`sDay('${c.ds}')`:''}" ondragover="event.preventDefault()" ondrop="dropT(event,'${c.ds}')"><div class="cnum">${c.day}</div>${dots?`<div style="margin-bottom:1px">${dots}</div>`:''}${chips}${dt.length>2?`<div style="font-size:7px;color:var(--text3)">+${dt.length-2}</div>`:''}</div>`;}).join('');if(selDay)renderSel();}
+function sDay(d){selDay=selDay===d?null:d;renderCal();document.getElementById('sel-panel').style.display=selDay?'block':'none';if(selDay)renderSel();}
+function renderSel(){if(!selDay)return;const d=new Date(selDay);document.getElementById('sel-title').textContent=`${d.getMonth()+1}/${d.getDate()} (${DY[d.getDay()]}) 할일`;document.getElementById('sel-list').innerHTML=tasks.filter(t=>t.date===selDay).map(t=>tHTML(t)).join('')||'<div class="empty">이 날 할일이 없어요!</div>';}
+function chM(d){calM+=d;if(calM<0){calM=11;calY--;}if(calM>11){calM=0;calY++;}selDay=null;document.getElementById('sel-panel').style.display='none';renderCal();}
+function goToday(){const n=new Date();calY=n.getFullYear();calM=n.getMonth();selDay=null;document.getElementById('sel-panel').style.display='none';renderCal();}
+let dragId=null;
+function dSt(e,id){dragId=id;}
+function dropT(e,d){if(!dragId)return;const t=tasks.find(x=>x.id===dragId);if(t){t.date=d;renderAll();}dragId=null;}
+function renderIg(){const p=Math.min(Math.round(igPosts.length/12*100),100);document.getElementById('ig-t').textContent=igPosts.length;document.getElementById('ig-p').textContent=p+'%';document.getElementById('ig-b').style.width=p+'%';document.getElementById('ig-list').innerHTML=igPosts.length?igPosts.map(p=>`<div class="vr"><span style="flex:1">${p.title}</span><span class="tag tt2">업로드</span></div>`).join(''):'<div class="empty">릴스를 추가해보세요!</div>';}
+function addIg(){const t=prompt('릴스 제목:');if(!t||!t.trim())return;igPosts.push({id:NID++,title:t.trim()});logUpload('insta',t.trim());renderIg();}
+function renderBlog(){const done=blPosts.filter(p=>p.done).length;document.getElementById('bl-t').textContent=blPosts.length;document.getElementById('bl-d').textContent=done;document.getElementById('bl-i').textContent=blPosts.filter(p=>!p.done).length;document.getElementById('bl-list').innerHTML=blPosts.length?blPosts.map(p=>`<div class="tr"><div class="cb${p.done?' on':''}" onclick="togBlog(${p.id})">${p.done?'<i class="ti ti-check"></i>':''}</div><span class="tt${p.done?' dn':''}">${p.title}</span><span class="tag ${p.done?'tt2':'tb'}" style="margin-left:auto">${p.done?'발행 완료':'아이디어'}</span></div>`).join(''):'<div class="empty">블로그 아이디어를 추가해보세요!</div>';}
+function togBlog(id){const p=blPosts.find(x=>x.id===id);if(!p)return;const was=p.done;p.done=!p.done;if(!was&&p.done)logUpload('blog',p.title);renderBlog();renderHome();}
+function addBlog(){const t=prompt('블로그 글 아이디어:');if(!t||!t.trim())return;blPosts.push({id:NID++,title:t.trim(),done:false});renderBlog();}
+function renderV(arr,tId,vId,lId){document.getElementById(tId).textContent=arr.length;if(vId)document.getElementById(vId).textContent=arr.reduce((a,b)=>a+b.views,0).toLocaleString();document.getElementById(lId).innerHTML=arr.length?arr.map(v=>`<div class="vr"><span style="flex:1">${v.title}</span><input class="vi" type="number" value="${v.views}" min="0" placeholder="조회수" onchange="updV(${v.id},'${v.plk}',this.value)"></div>`).join(''):'<div class="empty">첫 영상을 추가해보세요!</div>';}
+function addVid(pl){const ls={tt:'틱톡',yt:'유튜브 쇼츠',nv:'네이버 클립'};const t=prompt(`${ls[pl]} 영상 제목:`);if(!t||!t.trim())return;const plk=pl==='tt'?'tiktok':pl==='yt'?'youtube':'naver';const v={id:NID++,title:t.trim(),views:0,plk};if(pl==='tt')ttVids.push(v);else if(pl==='yt')ytVids.push(v);else nvVids.push(v);logUpload(plk,t.trim());renderV(ttVids,'tt-t','tt-v','tt-list');renderV(ytVids,'yt-t','yt-v','yt-list');renderV(nvVids,'nv-t','nv-v','nv-list');}
+function updV(id,plk,val){const arr=plk==='tiktok'?ttVids:plk==='youtube'?ytVids:nvVids;const v=arr.find(x=>x.id===id);if(!v)return;v.views=parseInt(val)||0;renderV(ttVids,'tt-t','tt-v','tt-list');renderV(ytVids,'yt-t','yt-v','yt-list');renderV(nvVids,'nv-t','nv-v','nv-list');}
+function renderMoney(){const inc=incomes.reduce((a,b)=>a+b.amt,0),exp=expenses.reduce((a,b)=>a+b.amt,0),net=inc-exp,pct=Math.min(Math.round(inc/300000*100),100);document.getElementById('cp-i').textContent=fmt(inc);document.getElementById('cp-e').textContent=fmt(exp);document.getElementById('cp-n').textContent=fmt(net);document.getElementById('cp-n').style.color=net>=0?'#0F6E56':'#A32D2D';document.getElementById('cp-p').textContent=pct+'%';document.getElementById('cp-b').style.width=pct+'%';document.getElementById('g1b').style.width=pct+'%';document.getElementById('g1p').textContent=pct+'%';document.getElementById('inc-list').innerHTML=incomes.length?incomes.map(i=>`<div class="mr"><span>${i.desc}</span><span class="mi">+${fmt(i.amt)}</span></div>`).join(''):'<div class="empty">첫 수익을 기록해보세요!</div>';document.getElementById('exp-list').innerHTML=expenses.length?expenses.map(e=>`<div class="mr"><span>${e.desc}</span><span class="me">-${fmt(e.amt)}</span></div>`).join(''):'<div class="empty">지출 없음</div>';}
+function addInc(){const d=prompt('수입 항목:');if(!d||!d.trim())return;const a=parseInt(prompt('금액(원):'));if(!a||isNaN(a))return;incomes.push({desc:d.trim(),amt:a});renderMoney();renderHome();}
+function addExp(){const d=prompt('지출 항목:');if(!d||!d.trim())return;const a=parseInt(prompt('금액(원):'));if(!a||isNaN(a))return;expenses.push({desc:d.trim(),amt:a});renderMoney();}
+function renderBench(){const f=benchF==='전체'?benchmarks:benchmarks.filter(b=>b.platform===benchF);document.getElementById('bench-list').innerHTML=f.length?f.map(b=>{const c=BPC[b.platform]||BPC['기타'];return`<div class="br2"><div class="bav" style="background:${c[0]};color:${c[1]}">${b.handle.replace('@','')[0].toUpperCase()}</div><div style="flex:1"><div style="font-size:12px;font-weight:500;color:var(--text)">${b.handle} <span class="tag tg">${b.platform}</span>${b.followers?`<span style="font-size:10px;color:var(--text3);margin-left:4px">${b.followers}</span>`:''}</div><div style="font-size:10px;color:var(--text2);margin-top:2px;line-height:1.5">${b.note}</div></div></div>`;}).join(''):'<div class="empty">'+(benchF==='전체'?'계정을 추가해보세요!':benchF+' 계정이 없어요.')+'</div>';}
+function setBF(f,el){benchF=f;document.querySelectorAll('#bf-row .ftab').forEach(t=>t.classList.remove('on'));el.classList.add('on');renderBench();}
+function addBench(){const h=prompt('계정 핸들:');if(!h||!h.trim())return;const ps=PLOPT.map((p,i)=>`${i+1}. ${p}`).join('\n');const pi=prompt(`플랫폼:\n${ps}`);if(!pi)return;const num=parseInt(pi);const pl=!isNaN(num)&&num>=1&&num<=PLOPT.length?PLOPT[num-1]:(PLOPT.find(p=>p===pi.trim())||'기타');const fw=prompt('팔로워 수:');const note=prompt('메모:');benchmarks.push({id:NID++,handle:h.trim(),platform:pl,followers:fw||'',note:note||''});renderBench();}
+function renderTrends(){document.getElementById('trend-list').innerHTML=trends.length?trends.map(t=>`<div class="tr"><div class="cb${t.done?' on':''}" onclick="togTr(${t.id})">${t.done?'<i class="ti ti-check"></i>':''}</div><span class="tt${t.done?' dn':''}">${t.text}</span><span class="tag ta" style="margin-left:auto">${t.cat}</span></div>`).join(''):'<div class="empty">트렌드를 추가해보세요!</div>';}
+function addTrend(){const t=prompt('트렌드 메모:');if(!t||!t.trim())return;const c=prompt('카테고리:');trends.push({id:NID++,text:t.trim(),cat:c||'기타',done:false});renderTrends();}
+function togTr(id){const t=trends.find(x=>x.id===id);if(!t)return;t.done=!t.done;renderTrends();}
+function addCat(){const n=prompt('카테고리명:');if(!n||!n.trim())return;const cls=['tp','tt2','tc','ta','tb','tg'];const el=document.createElement('span');el.className='tag '+cls[Math.floor(Math.random()*cls.length)];el.style.cursor='pointer';el.textContent=n.trim();el.onclick=function(){this.remove();};document.getElementById('cat-tags').appendChild(el);}
+function renderMand(){document.getElementById('mand-grid').innerHTML=[0,1,2,3,4,5,6,7,8].map(i=>{const isC=i===4;const sub=mand.subs[i];if(isC)return`<div class="mcell mc"><div class="mctxt" contenteditable="true" onblur="mand.center=this.textContent">${mand.center}</div></div>`;return`<div class="mcell ms"><div class="msn" contenteditable="true" onblur="mand.subs[${i}].name=this.textContent">${sub.name}</div>${sub.tasks.map((t,ti)=>`<div class="mtr"><div class="mcb${sub.done[ti]?' on':''}" onclick="togM(${i},${ti})">${sub.done[ti]?'<i class="ti ti-check"></i>':''}</div><div class="mtt${sub.done[ti]?' dn':''}" contenteditable="true" onblur="mand.subs[${i}].tasks[${ti}]=this.textContent">${t}</div></div>`).join('')}${sub.tasks.length<8?`<div class="mtr" style="margin-top:3px"><span style="font-size:9px;color:var(--text3);cursor:pointer" onclick="addMT(${i})">+ 추가</span></div>`:''}</div>`;}).join('');}
+function togM(si,ti){mand.subs[si].done[ti]=!mand.subs[si].done[ti];renderMand();}
+function addMT(si){const t=prompt('실천과제:');if(!t||!t.trim())return;mand.subs[si].tasks.push(t.trim());mand.subs[si].done.push(false);renderMand();}
+function renderVision(){document.getElementById('vision-grid').innerHTML=visions.map(v=>`<div class="vcard"><div class="vph" style="background:${v.bg}">${v.emoji}</div><div class="vbody"><div class="vtitle">${v.title}</div><span class="tag ${VCAT[v.cat]||'tg'}">${v.cat}</span></div></div>`).join('');}
+function addVision(){const t=prompt('비전/꿈:');if(!t||!t.trim())return;const cat=prompt('카테고리 (라이프/수익/콘텐츠/SNS/꿈/건강):');const em=['🌟','💫','🎯','✨','🏆','🚀','🌸','🎨'];const bgs=['#E1F5EE','#EEEDFE','#FAECE7','#FAEEDA','#E6F1FB','#FBEAF0'];visions.push({id:NID++,title:t.trim(),cat:cat||'꿈',emoji:em[visions.length%em.length],bg:bgs[visions.length%bgs.length]});renderVision();}
+function renderHabits(){document.getElementById('habit-sec').innerHTML=habits.map((h,hi)=>`<div style="margin-bottom:.6rem"><div style="font-size:11px;color:var(--text2);margin-bottom:3px">${h.name}</div><div class="hg">${['월','화','수','목','금','토','일'].map((d,di)=>`<div style="text-align:center"><div class="hd">${d}</div><div class="hc${h.cells[di]?' on':''}" onclick="togH(${hi},${di})"></div></div>`).join('')}</div></div>`).join('');}
+function togH(hi,di){habits[hi].cells[di]=!habits[hi].cells[di];renderHabits();}
+function openAdd(ctx){addCtx=ctx;document.getElementById('m-text').value='';document.getElementById('m-cat').value='업무';document.getElementById('m-prio').value='mid';document.getElementById('m-date').value=tds();document.getElementById('modal-title').textContent='할일 추가';document.getElementById('modal').style.display='flex';}
+function openAddSel(){addCtx='sel';document.getElementById('m-text').value='';document.getElementById('m-cat').value='업무';document.getElementById('m-prio').value='mid';document.getElementById('m-date').value=selDay||tds();document.getElementById('modal-title').textContent='이 날 할일 추가';document.getElementById('modal').style.display='flex';}
+function closeModal(){document.getElementById('modal').style.display='none';}
+function saveTask(){const txt=document.getElementById('m-text').value.trim();if(!txt)return;const cat=document.getElementById('m-cat').value,prio=document.getElementById('m-prio').value,date=document.getElementById('m-date').value||tds();tasks.push({id:NID++,text:txt,cat,prio,date,done:false});closeModal();renderAll();}
+document.getElementById('m-text').addEventListener('keydown',e=>{if(e.key==='Enter')saveTask();});
+document.getElementById('modal').addEventListener('click',e=>{if(e.target===document.getElementById('modal'))closeModal();});
+function renderAll(){renderHome();renderTodo();renderWeekly();renderCal();renderIg();renderBlog();renderV(ttVids,'tt-t','tt-v','tt-list');renderV(ytVids,'yt-t','yt-v','yt-list');renderV(nvVids,'nv-t','nv-v','nv-list');renderMoney();renderBench();renderTrends();renderMand();renderVision();renderHabits();}
+function init(){const n=new Date();calY=n.getFullYear();calM=n.getMonth();document.getElementById('today-date').textContent=n.toLocaleDateString('ko-KR',{year:'numeric',month:'long',day:'numeric',weekday:'short'});renderAll();}
+init();
+</script>
+</body>
+</html>
